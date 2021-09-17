@@ -1,0 +1,167 @@
+	Model Relationships
+	---------------------
+In RDBMS,we can maintain the relationships between the tables in 3-ways,they are
+	
+	1. Many-to-one relationship
+	2. Many-to-many relationships
+	3. One-to-one relationship
+
+
+Many-to-one relationship:
+-----------------------------
+	We can define many-to-one relationship we use django.db.models.ForeignKey
+
+	ForeignKey requires a positional argument the class to which the model is related.
+
+Syntax:
+	class Modelname(models.Model):
+		----------
+		----------
+		----------
+		author=models.ForeignKey(User,related_name=blog_posts')
+
+	This means an author may have multiple (or) many posts.
+
+Many-to-many relationships:
+---------------------------
+	We can define many-to-many relationship we use django.db.models.ManyToManyField
+
+	Ex:- class post(models.Model):
+			-----------
+			----------
+			-----------
+			Likes=models.ManyToManyField(User,related_name='likes')
+
+	This means a post has multiple likes from multiple authors.
+
+One-to-one relationship:
+----------------------- 
+	We can define one-to-one relationship we use django.db.models.OneToOneField
+
+	Ex:- class profile(models.Model):
+			----------
+			----------
+			----------
+			User=models.OneToOneField(User,on_delete=models.CASCADE)
+
+ex:
+---
+create a django project to maintain the one-to-one relationship between the models?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj21
+
+step2:
+-----
+goto project location and to create an application in our project location.
+
+	cd proj21
+
+	python manage.py startapp app21
+
+step3:
+----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app21'
+]
+
+step4:
+-----
+to configure the database settings in the settings.py file of the project.
+
+	settings.py
+	----------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+
+step5:
+-----
+to define a models in the models.py file of the application
+
+	models.py
+	---------
+from django.db import models
+
+# Create your models here.
+class Restaurant(models.Model):
+    name=models.CharField(max_length=20)
+    add=models.CharField(max_length=30)
+    active=models.BooleanField(default=False)
+    def __str__(self):
+        return "%s %s"%(self.name,self.add)
+    
+class Place(models.Model):
+    owner=models.CharField(max_length=10)
+    add=models.CharField(max_length=20)
+    loc=models.OneToOneField(Restaurant,on_delete=models.CASCADE)
+    def __str__(self):
+        return "%s %s %s"%(self.owner,self.add,self.loc)
+
+step6:
+-------
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+-----
+to create a models 
+
+	python manage.py makemigrations
+
+step8:
+------
+to generate the tables in the database
+
+	python manage.py migrate
+
+create an objects
+---------------
+	python manage.py shell
+
+>>> from app21.models import Restaurant,Place
+>>> r1=Restaurant(name="vagdevi",add="ameerepet")
+>>> r1.save()
+>>> r1
+<Restaurant: vagdevi ameerepet>
+
+>>> r2=Restaurant(name="iglobal",add="sr nagar",active=True)
+>>> r2.save()
+>>> r2
+<Restaurant: iglobal sr nagar>
+
+>>> for rec in Restaurant.objects.all():
+          print(rec.name,rec.add,rec.active)
+
+vagdevi ameerepet False
+iglobal sr nagar True
+
+>>> p1=Place(owner="siva",add="ammerpet",loc=r1)
+>>> p1.save()
+>>> p1
+<Place: siva ammerpet vagdevi ameerepet>
+
+>>> p2=Place(owner="rama",add="sr nager",loc=r2)
+>>> p2.save()
+>>> p2
+<Place: rama sr nager iglobal sr nagar>
+
+>>> for rec in Place.objects.all():
+        print(rec.owner,rec.add,rec.loc)
+
+siva ammerpet vagdevi ameerepet
+rama sr nager iglobal sr nagar
+

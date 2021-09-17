@@ -1,0 +1,249 @@
+ex:
+---
+create models with one to many relationship?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj22
+
+step2:
+----
+goto project location and to create an applicatio in our project.
+
+	cd proj22
+
+	python manage.py startapp app22
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app22'
+]
+
+step4:
+----
+to configure the database settings in the settings.py file of the project.
+
+	settings.py
+	-----------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+step5:
+-----
+to create a models in the models.py file of the project.
+
+	models.py
+	--------
+from django.db import models
+
+# Create your models here.
+class Menu(models.Model):
+    name=models.CharField(max_length=20)
+    def __str__(self):
+        return '%s'%self.name
+class Items(models.Model):
+    menu=models.ForeignKey(Menu,on_delete=models.CASCADE)
+    item_name=models.CharField(max_length=10)
+    item_price=models.IntegerField()
+    def __str__(self):
+        return '%s %s'%(self.menu,self.item_name)
+
+step6:
+-----
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+----
+to apply the makemigrations
+
+	python manage.py makemigrations
+
+step8:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+----
+goto the shell
+
+	python manage.py shell
+
+>>> from app22.models import Menu,Items
+>>> m1=Menu(name="vagdevi FastFood")
+>>> m1.save()
+>>> m1
+<Menu: vagdevi FastFood>
+
+>>> i1=Items(menu=m1,item_name='biriyani',item_price=90)
+>>> i1.save()
+>>> i1
+<Items: vagdevi FastFood biriyani>
+
+>>> i2=Items(menu=m1,item_name='cooldrink',item_price=20)
+>>> i2.save()
+>>> i2
+<Items: vagdevi FastFood cooldrink>
+
+>>> i3=Items(menu=m1,item_name='softdrink',item_price=200)
+>>> i3.save()
+>>> i3
+<Items: vagdevi FastFood softdrink>
+
+>>> for item in Items.objects.all():
+        print(item.menu,item.item_name,item.item_price)
+
+vagdevi FastFood biriyani 90
+vagdevi FastFood cooldrink 20
+vagdevi FastFood softdrink 200
+
+ex:
+---
+create models with many to many relationship?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj23
+
+step2:
+----
+goto project location and to create an applicatio in our project.
+
+	cd proj23
+
+	python manage.py startapp app23
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app23'
+]
+
+step4:
+----
+to configure the database settings in the settings.py file of the project.
+
+	settings.py
+	-----------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+step5:
+-----
+to create a models in the models.py file of the project.
+
+	models.py
+	--------
+from django.db import models
+
+# Create your models here.
+class Customer(models.Model):
+    name=models.CharField(max_length=20)
+    table_num=models.IntegerField()
+    def __str__(self):
+        return '%s'%self.name
+
+class Waiter(models.Model):
+    cust=models.ManyToManyField(Customer)
+    wname=models.CharField(max_length=20)
+    def __str__(self):
+        return "%s %s"%(self.cust,self.wname)
+
+step6:
+----
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+-----
+to apply the makemigrtaions
+
+	python manage.py makemigrations
+
+step8:
+----
+to apply the migrate
+
+	python manage.py migrate
+
+step9:
+----
+goto the shell
+
+	python manage.py shell
+
+>>> from app23.models import Customer,Waiter
+>>> c1=Customer(name="siva",table_num=1)
+>>> c1.save()
+>>> c1
+<Customer: siva>
+
+>>> c2=Customer(name="rama",table_num=2)
+>>> c2.save()
+>>> c2
+<Customer: rama>
+
+>>> c3=Customer(name="krishna",table_num=1)
+>>> c3.save()
+>>> c3
+<Customer: krishna>
+
+>>> w1=Waiter(wname="abc")
+>>> w1.save()
+>>> w1
+<Waiter: app23.Customer.None abc>
+
+>>> Waiter.cust=w1
+
+>>> w2=Waiter(wname="xyz")
+>>> w2.save()
+>>> w3=Waiter(wname="pqr")
+>>> w3.save()
+>>> Waiter.cust=w2
+>>> waiter.cust=w1
+
+
+>>> w1=Waiter(wname="abc")
+>>> w1.save()
+>>> Waiter.cust=c1
+>>> w1
+<Waiter: siva abc>
+
+>>> w2=Waiter(wname="xyz")
+>>> w2.save()
+>>> Waiter.cust=c2
+>>> w2
+<Waiter: rama xyz>
+
+>>> w3=Waiter(wname="pqr")
+>>> w3.save()
+>>> Waiter.cust=c2
+>>> w3
+<Waiter: rama pqr>

@@ -1,0 +1,300 @@
+			CSS
+			---
+what is CSS?
+-----------
+CSS means Cascading Style Sheets
+
+CSS is a Style Sheet language,which is used to describe the look and formating the documents written in markup languages.
+
+CSS adds new features/attributes to our HTML document.
+
+the latest version of CSS is CSS3
+
+syntax
+------
+	selector{
+                  name:value;
+                  name:value;
+	            .....
+		  name:value;
+                }
+
+how to implenet the css to our html document?
+----------------------------------------------
+	we can implement the css to our html document in 3-ways,they are
+
+	1).inline css
+
+	2).internal css
+
+	3).External css
+
+inline css:
+-----------
+	inline css means we are using style attribute of our html tags in the body section.
+
+ex:
+--
+<!DOCTYPE html>
+<html>
+<head>
+<title>inline css</title>
+</head>
+<body>
+<h1 style="color:red;text-align:center">welcome to Vagdevi Technologies</h1>
+<p style="color:blue;font-style:elephant;font-size:30px">CSS is a Style Sheet language,which is used to describe the look and formating the documents written in markup languages.</p>
+</body>
+</html>
+
+internal css:
+-------------
+	internal css means we are using style tag of html in the head section.
+
+ex:
+---
+<!DOCTYPE html>
+<html>
+<head>
+<title>internal css</title>
+<style>
+h1{
+   color:blue;
+   text-align:center;
+   }
+p{
+  color:red;
+  font-style:elephant;
+  font-size:30px;
+ }
+</style>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>CSS is a Style Sheet language,which is used to describe the look and formating the documents written in markup languages.</p>
+<p>HTML is a markup language which is used create a web pages</p>
+</body>
+</html>
+
+external css
+------------
+	external css menas we can create seperate css file after that we can link/add that css file into our html document.
+
+ex:
+---
+	sample.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+<title>external css</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>CSS is a Style Sheet language,which is used to describe the look and formating the documents written in markup languages.</p>
+<p>HTML is a markup language which is used create a web pages</p>
+</body>
+</html>
+
+	base.css
+	--------
+h1{
+   color:green;
+   text-align:center;
+   }
+p{
+  color:yellow;
+  font-style:elephant;
+  font-size:30px;
+ }
+
+types of css selectors:
+------------------------
+	the css selectors can be categorized into 5-types,they are
+
+	1).Element selector
+
+	2).Id selector
+
+	3).Class selector
+
+	4).Universal selector
+
+	5).Group selector
+
+Element selector:
+----------------
+	we can use any html element as a selector,is known as Element selector.
+
+ex:
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<title>external css</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>CSS is a Style Sheet language.</p>
+<p>HTML is a markup language.</p>
+</body>
+</html>
+
+	base.css
+	--------
+h1{
+   color:green;
+   text-align:center;
+   }
+p{
+  color:yellow;
+  font-style:elephant;
+  font-size:30px;
+ }
+
+
+Id selector:
+-----------
+	we can use selector as a id attribute value of html tags,is known as a Id selector.
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<title>external css</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>CSS is a Style Sheet language.</p>
+<p id="para2">HTML is a markup language.</p>
+</body>
+</html>
+
+	base.css
+	--------
+h1{
+   color:green;
+   text-align:center;
+   }
+p{
+  color:yellow;
+  font-style:bold;
+  font-size:30px;
+ }
+#para2{
+  color:red;
+  font-style:italic;
+  font-size:50px;
+  font-family:elephant;
+  }
+
+Class Selector:
+---------------
+	we can use selector as class attribute value of html tags,is known as a class selector.
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<title>external css</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<h1 class="header1">welcome to IGlobal</h1>
+<p>CSS is a Style Sheet language.</p>
+<p id="para2">HTML is a markup language.</p>
+</body>
+</html>
+
+	base.css
+	-------
+h1{
+   color:green;
+   text-align:center;
+   }
+
+.header1{   
+   color:red;
+   text-align:right;
+   }
+
+p{
+  color:yellow;
+  font-style:bold;
+  font-size:30px;
+ }
+#para2{
+  color:red;
+  font-style:italic;
+  font-size:50px;
+  font-family:elephant;
+  }
+
+ex:
+---
+	sample.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+<title>external css</title>
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<h1 class="header1">welcome to IGlobal</h1>
+<p>CSS is a Style Sheet language.</p>
+<p id="para2">HTML is a markup language.</p>
+<p class="header1">Django is a python related highlevel webdevelopment framework</p>
+</body>
+</html>
+
+	base.css
+	--------
+h1{
+   color:green;
+   text-align:center;
+   }
+
+h1.header1{   
+   color:red;
+   text-align:right;
+   }
+
+.header1{   
+   color:blue;
+   text-align:right;
+   }
+p{
+  color:yellow;
+  font-style:bold;
+  font-size:30px;
+ }
+#para2{
+  color:red;
+  font-style:italic;
+  font-size:50px;
+  font-family:elephant;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

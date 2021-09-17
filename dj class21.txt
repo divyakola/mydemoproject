@@ -1,0 +1,271 @@
+ex:
+---
+create django project with template tags?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj14
+
+step2:
+-----
+goto project location and to create an application in our project.
+
+	cd proj14
+
+	python manage.py startapp app14
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-------------
+INSTALLED_APPS = [
+    
+    'app14'
+]
+
+step4:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+
+step5:
+------
+to create a views in the views.py file of the application.
+
+	views.py
+	-------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    employees=[{"name":"siva","age":29,"sal":3000},
+               {"name":"rama","age":28,"sal":2000},
+               {"name":"krishna","age":30,"sal":4000}
+               ]
+    customers=["siva","rama","krishna"]
+    number=10
+    return render(request,'output.html',
+                  {'employe':employees,
+                   'customer':customers,'num':number})
+               
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>
+{% for rec in employe %}
+    {{ rec }}<br>
+{% endfor %}
+<hr>
+{% for rec in customer %}
+    {{ rec|capfirst }}<br>
+{% endfor %}
+<hr>
+{% if num == 10 %}
+    <p> hai siva</p>
+{% endif %}
+<hr>
+{{ employe|dictsort:"name" }}
+</h1>
+</body>
+</html>
+
+step6:
+-----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from app14.views import welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome)
+]
+
+step7:
+-----
+to apply the migration
+
+	python manage.py migrate
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+----------
+	proj14
+	   |--->app14
+	   |      |--->views.py
+	   |--->proj14
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->output.html
+	   |--->manage.py
+
+
+ex:
+---
+create a django project to achive the html code reusability by using extends tag?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj15
+
+step2:
+----
+goto project location and to create an application in our project.
+
+	cd proj15
+
+	python manage.py startapp app15
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app15'
+]
+
+step4:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+       
+        'DIRS': [BASE_DIR/'templates'],
+        
+    },
+]
+
+step5:
+------
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'welcome.html')
+
+	welcome.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% extends 'base.html' %}
+</body>
+</html>
+
+	base.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<h1>welcome to Vagdevi Technologies</h1>
+<h2>hai siva good evening</h2>
+</body>
+</html>
+
+step6:
+----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from app15.views import welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome)
+]
+
+step7:
+-----
+to apply the migrations
+
+	python manage.py migrate
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+----------
+	proj15
+	   |--->app15
+	   |      |--->views.py
+	   |--->proj15
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->welcome.html
+	   |      |--->base.html
+	   |--->manage.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+

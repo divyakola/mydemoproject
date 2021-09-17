@@ -1,0 +1,188 @@
+ex1:
+----
+wap to print hello world on the webpage by using javascript?
+
+<!DOCTYPE html>
+<html>
+<body>
+<script>
+   document.write("hello world");
+</script>
+</body>
+</html>
+
+ex2:
+---
+<!DOCTYPE html>
+<html>
+<body bgcolor="blue">
+<script>
+   console.log("hello world");
+</script>
+</body>
+</html>
+
+ex3:
+----
+<!DOCTYPE html>
+<html>
+<body bgcolor="red">
+<script>
+   alert("hello world");
+</script>
+</body>
+</html>
+
+ex4:
+----
+write a javascript program to perform addition of two numbers?
+
+<!DOCTYPE html>
+<html>
+<body bgcolor="powderblue">
+<script>
+   var a=10;
+   var b=20;
+   var c=a+b;
+   document.write("the sum of "+a+" and "+b+" is "+c);
+</script>
+</body>
+</html>
+
+	(or)
+
+<!DOCTYPE html>
+<html>
+<body bgcolor="red">
+<script>
+   let a=10;
+   let b=20;
+   let c=a+b;
+   document.write("the sum of "+a+" and "+b+" is "+c);
+</script>
+</body>
+</html>
+
+ex5:
+----
+write a javascript program to perform addition of two numbers from user input?
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function add(){
+	var a=parseInt(document.getElementById('fn').value);
+	var b=parseInt(document.getElementById('sn').value);
+	var c=a+b;
+	document.getElementById('addition').value=c;
+      }
+</script>
+</head>
+<body bgcolor="red">
+Enter First Number:
+<input type="text" id='fn'><br><br>
+Enter Second Number:
+<input type="text" id='sn'><br><br>
+<button onclick=add()>add</button><br><br>
+Result:
+<input type="text" id="addition">
+</body>
+</html>
+
+ex6:
+----
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function add(){
+	var a=parseInt(document.getElementById('fn').value);
+	var b=parseInt(document.getElementById('sn').value);
+	var c=a+b;	
+	document.getElementById('res').innerHTML=c;
+      }
+</script>
+</head>
+<body bgcolor="red">
+Enter First Number:
+<input type="text" id='fn'><br><br>
+Enter Second Number:
+<input type="text" id='sn'><br><br>
+<button onclick=add()>add</button><br><br>
+<p id="res"></p>
+</body>
+</html>
+
+assignment-1:
+-------------
+to perform arithmetic calculations?
+
+ex7:
+---
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function add(){
+	var a=parseInt(document.getElementById('fn').value);
+	var b=parseInt(document.getElementById('sn').value);
+	var c=a+b;	
+	alert("the sum is: "+c);
+      }
+</script>
+</head>
+<body bgcolor="red">
+Enter First Number:
+<input type="text" id='fn'><br><br>
+Enter Second Number:
+<input type="text" id='sn'><br><br>
+<button onclick=add()>add</button><br><br>
+<p id="res"></p>
+</body>
+</html>
+
+ex8:
+---
+wap to check wheather given number is Even or Odd?
+
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function evenodd(){
+	var a=parseInt(document.getElementById('fn').value);
+	if(a%2==0)
+          {
+            document.write("Given number is Even number");
+	   }
+	else
+          {
+	    document.write("Given number is Odd number");
+	   }
+	 }
+</script>
+</head>
+<body bgcolor="red">
+Enter Number:
+<input type="text" id='fn'><br><br>
+<button onclick=evenodd()>check</button><br><br>
+</body>
+</html>
+
+assignment-2:
+-------------
+wap to check wheather given number is positive or negative or zero?
+
+
+
+
+
+
+
+
+
+
+
+
+

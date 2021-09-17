@@ -1,0 +1,334 @@
+Django ORM
+-----------
+ORM(Object Relational Mapper)
+
+Django ORM provides an elegant and powerful way to interact with the database instead of writeing sql queries.
+
+ORM describing how to access the data,manipulate the data and store the data into the database in object oriented fashion.
+
+by using ORM,we can perform CURD operations.
+	Create
+	Update
+	Retrieval	
+	Delete
+
+How to start Django shell?
+--------------------------
+	we can start the Django shell using the "shell" command
+
+		python manage.py shell
+
+Database Access through managers:-
+---------------------------------
+Django by default adds a manager called "objects" to every model class.
+
+The objects manager helps us to interact with the databse in complicated ways.
+
+The objects manager is the most common way for Django developers to interact with the database.
+
+>>> from app18.models import Employee
+>>> Employee.objects
+<django.db.models.manager.Manager object at 0x000002A1367833A0>
+>>> type(Employee.objects)
+<class 'django.db.models.manager.Manager'>
+
+
+	the objects manager provides some methods to perform the CURD operations.
+
+ex:
+---
+	app18/models.py
+	--------------
+from django.db import models
+
+# Create your models here.
+class Employee(models.Model):
+    eid=models.IntegerField(primary_key=True)
+    ename=models.CharField(max_length=20)
+    sal=models.DecimalField(max_digits=6,decimal_places=2)
+    dno=models.IntegerField()
+
+    def __str__(self):
+        return self.eid,":",self.ename
+    
+how to create an objects?
+------------------------
+	we can creating an objects in 3-ways,they are
+
+	1).Normal way
+	2).by using create() of Objects manager
+	3).by using bulk_create() of Objects manager
+
+Normal way:
+-----------
+>>> e1=Employee(eid=101,ename="siva",sal=4000,dno=10)
+>>> e1.save()
+>>> e1.eid
+101
+>>> e1.ename
+'siva'
+>>> e1.sal
+4000
+>>> e1.dno
+10
+>>> e1.pk
+101
+
+by using create()
+-----------------
+>>> Employee.objects.create(eid=102,ename="rama",sal=2000,
+dno=20)
+
+<Employee: 102,rama>
+
+>>> Employee.objects.create(eid=103,ename="krishna",sal=4000,
+dno=30)
+
+<Employee: 103,krishna>
+
+by using bulk_create()
+----------------------
+>>> Employee.objects.bulk_create([
+Employee(eid=104,ename="sachin",sal=3000,dno=10),
+Employee(eid=105,ename="dhoni",sal=2500,dno=20),
+Employee(eid=106,ename="virat",sal=3500,dno=30)])
+
+[<Employee: 104,sachin>, <Employee: 105,dhoni>, <Employee: 106,virat>]
+
+how to retreive the objects?
+----------------------------
+	we can retreive the objects by using all() of objects manager.
+
+	the all() to return the output as Query-Set
+
+	the Query-set object is same like as a List object in python but Query-set object don't supporting negative indexing.
+
+
+>>> records=Employee.objects.all()
+>>> records
+<QuerySet [<Employee: 101,siva>, <Employee: 102,rama>, <Employee: 103,krishna>, <Employee: 104,sachin>, <Employee: 105,dhoni>, <Employee: 106,virat>]>
+
+>>> records[0]
+<Employee: 101,siva>
+
+>>> records[5]
+<Employee: 106,virat>
+
+>>> records[-1]
+AssertionError: Negative indexing is not supported.
+
+>>> records[:3]
+<QuerySet [<Employee: 101,siva>, <Employee: 102,rama>, <Employee: 103,krishna>]>
+
+>>> for rec in records:
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+how to get raw_sql query?
+-------------------------
+>>> print(Employee.objects.all().query)
+
+SELECT "app18_employee"."eid", "app18_employee"."ename", "app18_employee"."sal", "app18_employee"."dno" FROM "app18_employee"
+
+how to get no.of objects?
+-------------------------
+	we can get the no.of objects(records) by using count() of objects manager.
+
+>>> Employee.objects.count()
+6
+
+how to ordering the records?
+----------------------------
+	we can ordering the records by using order_by() of objects manager.
+
+>>> records=Employee.objects.all()
+>>> for rec in records:
+         print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+for ascending order
+-------------------
+>>> for rec in Employee.objects.all().order_by('sal'):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+102 rama 2000.00 20
+105 dhoni 2500.00 20
+104 sachin 3000.00 10
+106 virat 3500.00 30
+101 siva 4000.00 10
+103 krishna 4000.00 30
+
+for descending order
+-------------------
+>>> for rec in Employee.objects.all().order_by('-sal'):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+106 virat 3500.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+102 rama 2000.00 20
+
+how to filter the objects/records?
+----------------------------------
+	we can filter the objects by using filter() of objects manager.
+
+
+>>> records=Employee.objects.all()
+>>> for rec in records:
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(dno=10):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+104 sachin 3000.00 10
+
+>>> for rec in Employee.objects.all().filter(ename='siva'):
+         print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+
+>>> for rec in Employee.objects.all().filter(dno=20,
+ename='siva'):
+     print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+No-Records found
+
+>>> for rec in Employee.objects.all().filter(ename='siva',dno=10):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+
+>>> for rec in Employee.objects.all().filter(dno=20,dno=10):
+         print(rec.eid,rec.ename,rec.sal,rec.dno)
+  
+SyntaxError: keyword argument repeated: dno
+
+Model Field Lookup's:
+----------------------
+	if we want to perform the in-depth filter operation on objects/records,in that case we are using model field lookup's concept.
+
+	ModelFieldName__lookupname
+
+>>> records=Employee.objects.all()
+>>> for rec in records:
+       print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(ename__contains='i'):
+      print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+
+>>> for rec in Employee.objects.all().filter(ename__contains='I'):
+       print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+for ignore the casess in other databases:
+-----------------------------------------
+>>> for rec in Employee.objects.all().filter(ename__icontains='I'):
+     print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(ename__startswith='s'):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+104 sachin 3000.00 10
+
+>>> for rec in Employee.objects.all().filter(ename__endswith='a'):
+       print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+
+>>> for rec in Employee.objects.all().filter(sal__gt=3000):
+          print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(sal__gte=3000):
+          print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(sal__lt=3000):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+102 rama 2000.00 20
+105 dhoni 2500.00 20
+
+>>> for rec in Employee.objects.all().filter(sal__lte=3000):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+102 rama 2000.00 20
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+
+
+
+
+
+
+
+
+
+
+
+
+__contains
+----------
+
+
+
+
+
+

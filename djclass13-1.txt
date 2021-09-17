@@ -1,0 +1,204 @@
+ex:
+----
+create a Django project with multiple applications?
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj4
+
+step2:
+-----
+goto project location and to create an application in our project.
+
+	cd proj4
+
+	python manage.py startapp app4
+
+	python manage.py startapp app4_2
+
+step3:
+-----
+to install our applications in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app4',
+    'app4_2'
+]
+
+step4:
+-----
+to create a views in the views.py file of our applications.
+
+	app4/views.py
+	-------------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def welcome(request):
+    return HttpResponse("hello world")
+
+	app4_2/views.py
+	----------------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def morning(request):
+    return HttpResponse("hai siva good morning")
+
+def evening(request):
+    return HttpResponse("hai siva good evening")
+
+step5:
+------
+to configure the url patterns for our views in the urls.py file.
+
+	proj4/urls.py
+	-------------
+from django.contrib import admin
+from django.urls import path
+from app4 import views
+from app4_2 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',views.welcome),
+    path('mr/',views.morning),
+    path('eve/',views.evening)
+]
+
+step6:
+------
+to apply the migration
+
+	python manage.py migrate
+
+error:
+-----
+AttributeError: module 'app4_2.views' has no attribute 'welcome'
+
+note:
+----
+whenever we are importing same name module morethan onetime in that case our-python interpreter to recognize recent imported module only.
+
+in the above example we are faceing module overloaded problem,to overcome that problem by using following scenario's
+
+scenario-1:
+-----------
+	proj4/urls.py
+	-------------
+from django.contrib import admin
+from django.urls import path
+from app4.views import welcome
+from app4_2.views import morning,evening
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome),
+    path('mr/',morning),
+    path('eve/',evening)
+]
+
+scenario-2:
+-----------
+	proj4/urls.py
+	-------------
+from django.contrib import admin
+from django.urls import path
+import app4.views as v1
+import app4_2.views as v2
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',v1.welcome),
+    path('mr/',v2.morning),
+    path('eve/',v2.evening)
+]
+
+scenario-3:
+-----------
+including another URLConfigurations
+	to create sepearte urls.py files in our applications and to include that urls.py files into our project urls.py file.
+
+	app4/urls.py
+	-------------
+from django.urls import path
+from . import views
+urlpatterns=[
+    path('wel/',views.welcome),
+    ]
+
+	app4_2/urls.py
+	--------------
+from django.urls import path
+from . import views
+urlpatterns=[
+    path('mr/',views.morning),
+    path('eve/',views.evening)
+    ]
+
+	proj4/urls.py
+	-------------
+from django.contrib import admin
+from django.urls import path,include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('app4/',include("app4.urls")),
+    path('app4_2/',include("app4_2.urls"))
+    
+]
+
+step7:
+-----
+to start the server
+
+	python manage.py runserver
+
+step8:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/app4/wel
+	http://127.0.0.1:8000/app4_2/mr
+
+
+structure
+---------
+	proj4
+	  |--->app4
+	  |      |--->views.py
+	  |      |--->urls.py
+	  |--->app4_2
+	  |      |--->view.py
+	  |      |--->urls.py
+          |--->proj4
+          |      |--->settings.py
+	  |      |--->urls.py
+          |--->manage.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

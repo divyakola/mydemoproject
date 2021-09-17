@@ -1,0 +1,174 @@
+ex:
+---
+create a djnago project to read the data from the user-input to perform the addition of two numbers and display the result on the webpage by using get()?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj6
+
+step2:
+-----
+goto project location and to create an application in our project location.
+
+	cd proj6
+
+	python manage.py startapp app6
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app6'
+]
+
+step4:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+       
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+
+step5:
+----
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+
+# Create your views here.
+def input(request):
+    return render(request,'input.html')
+
+def addition(request):
+    a=int(request.GET['fn'])
+    b=int(request.GET['sn'])
+    res=a+b
+    return render(request,'output.html',{'result':res})
+
+
+	input.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form action="add">
+Enter First Number:
+<input type="text" name="fn"><br><br>
+Enter Second Number:
+<input type="text" name="sn"><br><br>
+<input type="submit" value="add">
+</form>
+</body>
+</html>
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="red">
+<h1> the sum is:<h1>
+{{ result }}
+</body>
+</html>
+
+step6:
+-----
+to configure the url pattern for our views in the urls.py file.
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app6 import views
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('in/',views.input),
+    url('add',views.addition)
+]
+
+step7:
+----
+to apply the migrations
+
+	python manage.py migrate
+
+step8:
+------
+to start the server
+
+	python manage.py runserver
+
+step9:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/in
+
+structure
+---------
+	proj6
+	   |--->app6
+	   |     |---> views.py
+	   |--->proj6
+	   |     |---> settings.py
+	   |     |---> urls.py
+	   |--->templates
+	   |     |---> input.html
+           |     |---> output.html
+           |--->manage.py
+
+assignment-1:
+------------
+create a django project to read the data from the user input to perform the arithmetic calculations and to display results on the webpage by using get() ?
+
+assignment-2:
+------------
+create a django project to read the year and month from the user input to display that particular month calendar on the webpage by using get() ?
+
+assignment-3:
+------------
+create django project to read the input from the user password length and to display that particular password length random string on the webpage?
+
+assignment-4:
+-------------
+create django project take input from the user like byear to calculate the age and to dispaly that age on the webbrowser?
+
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+
+

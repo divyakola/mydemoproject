@@ -1,0 +1,237 @@
+ex1:
+---
+wap to display "hello world" message on the webpage?
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+   <title>hello</title>
+</head>
+<body>
+hello world
+</body>
+</html>
+
+ex2:
+---
+wap to display "hello world" on the webpage by using different heading tags?
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+   <title>headings</title>
+</head>
+<body>
+<h1>hello world</h1>
+<h2>hello world</h2>
+<h3>hello world</h3>
+<h4>hello world</h4>
+<h5>hello world</h5>
+<h6>hello world</h6>
+</body>
+</html>
+
+ex3:
+---
+wap to display "hello world" message on the web page by using heading tags with horizontal ruler?
+
+	sample.html
+	---------
+<!DOCTYPE html>
+<html>
+<head>
+   <title>headings with hr</title>
+</head>
+<body>
+<h1>hello world</h1>
+<hr>
+<h2>hello world</h2>
+<hr>
+<h3>hello world</h3>
+<hr>
+<h4>hello world</h4>
+<hr>
+<h5>hello world</h5>
+<hr>
+<h6>hello world</h6>
+</body>
+</html>
+
+ex4:
+---
+create a webpage with paragraphs'?
+
+<!DOCTYPE html>
+<html>
+<head>
+   <title>paragraphs</title>
+</head>
+<body>
+<h1>hello world</h1>
+<p>python is a Genderal purpose,high-level,interpreted,interactive,modular,dynamic typed,procedure oriented,object-oriented and scripting programming language.</p>
+
+<p>Django is a python related high-level web application framework which makes easier to build the better web applications with less code and more quickly.</p>
+
+<p>HTML is a markup langauge,HTML stands Hyper Text Marku Language to build webpagse and it provides structure of the webpages,it contanins html tags.</p>
+</body>
+</html>
+
+ex5:
+---
+wap to print text on the webpage like as poem's format?
+
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<h1>hello world</h1>
+<pre>
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+</pre>
+</body>
+</html>
+
+ex6: wap to break the lines?
+---
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<h1>hello world</h1>
+
+Beautiful is better than ugly.<br>
+Explicit is better than implicit.<br>
+Simple is better than complex.<br>
+Complex is better than complicated.
+
+</body>
+</html>
+
+ex7: wap to rotate the text?
+----
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<marquee>hello world</marquee>
+<marquee direction='right'>hello siva</marquee>
+</body>
+</html>
+
+ex8:
+----
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<b>HTML</b> is a markup langauge,<br><u>HTML</u> stands Hyper Text Marku Language to build <strike>webpagse</strike> and it provides structure of the webpages,it contanins <i>html tags</i>.
+</body>
+</html>
+
+ex9: wap to display the items on the webpage in ordered list?
+----
+
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<h1>Types Of Tea</h1>
+<ol>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ol>
+<hr>
+<h1>Types Of Tea</h1>
+<ol type='a'>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ol>
+<hr>
+<h1>Types Of Tea</h1>
+<ol type='A'>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ol>
+<hr>
+<h1>Types Of Tea</h1>
+<ol type='i'>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ol>
+<hr>
+<h1>Types Of Tea</h1>
+<ol type='I'>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ol>
+</body>
+</html>
+
+ex10: wap to display the items on the webpage in unordered list?
+----
+
+<!DOCTYPE html>
+<html>
+<head>   
+</head>
+<body>
+<h1>Types Of Tea</h1>
+<ul>
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ul>
+<hr>
+<h1>Types Of Tea</h1>
+<ul type="square">
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ul>
+<hr>
+<h1>Types Of Tea</h1>
+<ul type="circle">
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ul>
+<hr>
+<h1>Types Of Tea</h1>
+<ul type="disc">
+  <li>Normal Tea</li>
+  <li>Ginger Tea</li>
+  <li>Special Tea</li>
+  <li>Badam Tea</li>
+</ul>
+</body>
+</html>
+
+
+
+
+

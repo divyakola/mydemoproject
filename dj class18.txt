@@ -1,0 +1,305 @@
+note:
+-----
+in function based view's we can implement the different httprequest methods by using conditional statements.
+
+to implement the views by using another alternative way that is called class-based views.
+
+class based views:
+------------------
+	we can implement the views by using class,that type of views are called class based views.
+
+	we can create any class as a view in that case our class is extending by View class of generic module.
+
+	the View class internally provides every HttpRequest methods seperately.
+
+ex:
+---
+create a django project to print hello world on the webpage by using class based-views?
+
+step1:
+----
+to create a project
+
+	django-admin startproject proj10
+
+step2:
+-----
+goto project location and to create an application in our project location.
+
+	cd proj10
+
+	python manage.py startapp app10
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app10'
+]
+
+step4:
+-----
+to create a class-based views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.views.generic import View
+from django.http import HttpResponse
+# Create your views here.
+class welcome(View):
+    def get(self,request):
+        return HttpResponse("Hello world")
+
+step5:
+-----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	--------
+
+from django.contrib import admin
+from django.urls import path
+from app10.views import welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome.as_view())
+]
+
+step6:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step7:
+-----
+to start the server
+
+	python manage.py runserver
+
+step8:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+ex2:
+---
+create a django project to read the data from the user input,to perform the addition of that numbers to return the result on the webpage by using classbased views and we are using both get() and post() methods.
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj11
+
+step2:
+-----
+goto project location and to create an application in the project location.
+
+	cd proj11
+	
+	python manage.py startapp app11
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	------------
+INSTALLED_APPS = [
+    
+    'app11'
+]
+
+step4:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	----------
+TEMPLATES = [
+    {
+       
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+
+step5:
+----
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.views.generic import View
+# Create your views here.
+class ginput(View):
+    def get(self,request):
+        return render(request,'ginput.html')
+class pinput(View):
+    def get(self,request):
+        return render(request,'pinput.html')
+    
+class addition(View):
+    def get(self,request):
+        a=int(request.GET['fn'])
+        b=int(request.GET['sn'])
+        c=a+b
+        return render(request,'goutput.html',{'result':c})
+    def post(self,request):
+        a=int(request.POST['fn'])
+        b=int(request.POST['sn'])
+        c=a+b
+        return render(request,'poutput.html',{'result':c})
+        
+	ginput.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form action="add">
+Enter First Number:
+<input type="text" name="fn"><br><br>
+Enter Second Number:
+<input type="text" name="sn"><br><br>
+<input type="submit" value="ADD">
+</form>
+</body>
+</html>
+
+	goutput.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="red">
+<h1> the sum is: 
+{{ result }}
+</h1>
+</body>
+</html>
+
+	pinput.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="blue">
+<form action="add" method="post">
+ {% csrf_token %}
+Enter First Number:
+<input type="text" name="fn"><br><br>
+Enter Second Number:
+<input type="text" name="sn"><br><br>
+<input type="submit" value="ADD">
+</form>
+</body>
+</html>
+
+	poutput.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="orange">
+<h1> the sum is: 
+{{ result }}
+</h1>
+</body>
+</html>
+
+step6:
+-----
+to configure the url patterns for our class-based views in the urls.py file of the project.
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app11.views import ginput,addition,pinput
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('gin/',ginput.as_view()),
+    path('pin/',pinput.as_view()),
+    url('add',addition.as_view())
+]
+
+step7:
+-----
+to apply the migrations
+
+	python manage.py migrate
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/gin
+	http://127.0.0.1:8000/pin
+
+
+structure
+---------
+	proj11
+	   |--->app11
+	   |	  |--->views.py
+	   |--->proj11
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->ginput.html
+	   |	  |--->goutput.html
+	   |      |--->pinput.html
+	   |      |--->poutput.html
+           |-->manage.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

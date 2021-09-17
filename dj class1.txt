@@ -1,0 +1,192 @@
+what is Web Application?
+-----------------------
+	a web application is a Server side program,that utilizes web browsers and web technologies to perform a task over the web/internet.
+
+	the most of the web applications are implemented by using 3-tier architecture.
+
+what are the requirements needed to developing web applications?
+-----------------------------------------------------------------
+1).Technologies
+2).IDE's
+3).Design Pattern/architecture
+4).Runtime environments
+
+Technologies:
+-------------
+	Technologies can be categorized into 3-types,they are
+
+	1).Client-side technologies
+
+	2).Server-side technologies
+
+	3).Database technologies
+
+Client-side technologies
+-------------------------
+	these technologies are used to build the web pages and to perform the client side validations.
+
+	we can run the client-side programs to required web-browsers.
+
+	the client side technologies are html,css,javascript,...
+
+	the web browsers are Chrome,Firefox,safari,opera,...
+
+Server-side technologies:
+-------------------------
+	these technologies are used to take the request from the client,process that request and give back the response to the enduser/client.
+
+	to perform the server-side validations.
+
+	the server side technologies are Python,Java,.Net,php,ruby,...
+
+	we can execute/run the server-side programs to required webservers(middleware servers).
+
+	the web servers are ApacheTomcat,glasfish,JBoss,WAS,IIS,DDS,...
+
+Database technologies:
+----------------------
+	these technologies are used to communicate the databases and to perform CURD operations.
+
+	the most common database technology is called SQL(Structured Query Language)
+
+	we can execute the database program's to required Database servers.
+
+	the database servers are Oracle,SQL-Server,MYsql,Sqlite3,
+				 Postgresql,...,etc.,
+
+
+IDE's:
+------
+IDE's(Integrated Development Environment's)
+
+IDE is a application,which makes easier to build the applications by using any programming language.
+
+	(or)
+
+IDE provides Good environment to writeing any programming language source-code.
+
+IDE's provides Faster development of the Applications
+IDE's supports automatic Debugging concept.
+
+ex: Pycharm,Eclipse,Netbeans,Vs code,Atom,Spyder,....etc.,
+
+
+Design Pattern/Architecture:
+----------------------------
+	Design Pattern is a solution for the common recurring problems in Object oriented Paradigm.
+
+	the most of the web applications are follows MVC design pattern.
+
+	
+Runtime Environments:
+---------------------
+	after developing an applications,next our applications can anybody access from anywhere with the help of internet/web,in that case we need to required runtime environment/production servers/live environments.
+
+	ex: pythonanywhere,digital-ocean,heroku,cloud(aws,azure,gcp),..
+
+Client-side technologies:
+--------------------------
+	these technologies are used to build the web-pages and to perform the client side validations.
+
+	HTML	--> Structure of the web pages
+
+	CSS	--> Style to our web pages
+
+	JavaScript  --> Interactivity and client side validations
+
+
+HTML
+----
+HTML stands Hyper Text Markup Language.
+
+HTML is a markup language which is used to build the webpages.
+
+HTML provides structure of the webpages.
+
+HTML acontains Elements
+
+HTML elements tell's the browser how to display the content on the webpage.
+
+HTML tag means,any html element represented by using angular brackets.
+
+	<element>content</element>
+
+	ex:
+		<p>hello siva</p>
+
+	some tags dont required ending tags that tags are called single tags.
+
+	<element>
+
+	ex:
+		<br>
+
+history:
+-------
+in the year of 1989,Tim-BernersLee implementd www(world wide web)
+
+in the year of 1991,Tim-BernersLee implementd HTML
+
+latest html version is HTML5
+
+structure of the HTML?
+----------------------
+<!DOCTYPE html>
+<html>
+     <head>
+
+     </head>
+
+     <body>
+
+     </body>
+</html>
+
+note:
+----
+if we want to write/implementing any html program dont required any external softwares,just we need to required editors(notepad,notepad++,editplus,...,etc.,) and web browsers(Chrome,FireFox,IE,...,etc.,).
+
+we can save the html programs ".html" or ".htm" extensions.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

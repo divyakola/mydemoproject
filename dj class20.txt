@@ -1,0 +1,163 @@
+ex:
+---
+create a django project with template filter's?
+
+step1:
+------
+to create a project
+
+	django-admin startproject proj13
+
+step2:
+-----
+goto project location and to create an application in our project location.
+
+	cd proj13
+
+	python manage.py startapp app13
+
+step3:
+-----
+to install our application in the settings.py file of the project
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app13'
+]
+
+step4:
+------
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],
+        
+    },
+]
+
+step5:
+-----
+to create a views in the views.py file of the application?
+
+	views.py
+	--------
+from django.shortcuts import render
+from datetime import datetime
+# Create your views here.
+def welcome(request):
+    msg="hai siva krishna how are you"
+    wishes="HAI Siva Krishna"
+    num1=21
+    num2=25
+    now=datetime.now()
+
+    return render(request,'output.html',
+                  {'message':msg,'wishes':wishes,
+                   'number':num1,'number2':num2,
+                   'now':now})
+
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<h1>
+{{ message }}
+<hr>
+{{ message|upper }}
+<hr>
+{{ message|title }}
+<hr>
+{{ message|wordcount }}
+<hr>
+{{ message|truncatewords:"2" }}
+<hr>
+{{ message|truncatechars:"15" }}
+<hr>
+{{ wishes|lower|capfirst }}
+<hr>
+{{ wishes|length }}
+<hr>
+{{ wishes|cut:" "}}
+<hr>
+{{ number|divisibleby:"3"}}
+<hr>
+{{ number2|divisibleby:"3"}}
+<hr>
+{{ now|date:"D d m Y"}}
+<hr>
+{{ now|date:"SHORT_DATE_FORMAT"}}
+<hr>
+<hr>
+{{ now|date:"D d m Y"}} 
+{{ now|time:"H i"}}
+</h1>
+</body>
+</html>
+
+step6:
+-----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from app13.views import welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome)
+]
+
+step7:
+-----
+to apply the migrations
+
+	python manage.py migrate
+
+step8:
+------
+to start the server
+
+	python manage.py runserver
+
+step9:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+
+structure:
+---------
+	proj13
+	   |--->app13
+	   |      |---> views.py
+	   |--->proj13
+	   |      |---> settings.py
+	   |      |---> urls.py
+	   |--->templates
+	   |      |---> output.html
+	   |--->manage.py
+
+
+assignment-1:
+--------------
+create a django project,to read the data from the user input and to display that string with template filters?
+
+
+
+
+
+
+	

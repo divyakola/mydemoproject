@@ -1,0 +1,216 @@
+ex:
+---
+create a djnago project with modelforms?
+
+step1:
+----
+to create a project
+
+	django-admin startproject proj28
+
+step2:
+-----
+goto project location and to create an application in the project location.
+
+	cd proj28
+
+	python manage.py startapp app28
+
+step3:
+----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app28'
+]
+
+step4:
+-----
+to configure the database settings in the settings.py file of the project.
+
+	settings.py
+	----------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+step5:
+----
+to create a models in the models.py file of the application.
+
+	models.py
+	---------
+from django.db import models
+
+# Create your models here.
+class Product(models.Model):
+    pid=models.IntegerField(primary_key=True)
+    pname=models.CharField(max_length=20)
+    pcost=models.DecimalField(max_digits=4,decimal_places=1)
+    
+
+step6:
+----
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+-----
+to create a model(to generate sql query for our model)
+
+	python manage.py makemigrations
+
+step8:
+----
+to create a tables in the database(to execute sql query)
+
+	python manage.py migrate
+
+step9:
+-----
+to create a modelforms in the forms.py file of the application.
+
+	forms.py
+	-------
+from django import forms
+from .models import Product
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model=Product
+        fields=['pid','pname','pcost']
+
+step10:
+----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+
+step11:
+-----
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from .forms import ProductForm
+from django.http import HttpResponse
+from .models import Product
+# Create your views here.
+def pinput(request):
+    p_form=ProductForm()
+    return render(request,'input.html',{'p':p_form})
+def pinsert(request):
+    p_form=ProductForm(request.POST)
+    if p_form.is_valid():
+        p_form.save()
+        return HttpResponse("Product inserted successfully")
+def pinformation(request):
+    data=Product.objects.all()
+    return render(request,'output.html',{'records':data})
+
+	input.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form action="insert" method="post">
+{% csrf_token %}
+{{ p.as_p }}
+<input type="submit" value="add">
+</form>
+</body>
+</html>
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="red">
+<table border="5">
+<tr>
+   <th>Pid</th>
+   <th>Pname</th>
+   <th>Pcost</th>
+</tr>
+{% for rec in records %}
+<tr>
+   <td>{{ rec.pid }}</td>
+   <td>{{ rec.pname }}</td>
+   <td>{{ rec.pcost }}</td>
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+
+step12:
+-----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from app28 import views
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('in/',views.pinput),
+    url('insert',views.pinsert),
+    path('res/',views.pinformation)
+]
+
+step13:
+-----
+to start the server
+
+	python manage.py runserver
+
+step14:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/in
+
+	http://127.0.0.1:8000/res
+
+structure:
+---------
+	proj28
+	   |--->app28
+	   |      |--->models.py
+	   |      |--->forms.py
+	   |      |--->views.py
+	   |--->proj28
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->input.html
+	   |      |--->output.html
+	   |--->manage.py
+
+
+
+
+    

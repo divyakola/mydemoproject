@@ -1,0 +1,264 @@
+ex:
+---
+create a django project to achive the html code reusability by using include tag?
+
+step1:
+----
+to create a project
+
+	django-admin startproject proj16
+
+step2:
+-----
+goto project location and to create an application in our project.
+
+	cd proj16
+
+	python manage.py startapp app16
+
+step3:
+----
+to install our application in the settings.py file of the project
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app16'
+]
+
+step4:
+-----
+to create templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],       
+    },
+]
+
+step5:
+-----
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+
+# Create your views here.
+def welcome(request):
+    return render(request,'welcome.html')
+
+	
+	welcome.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+{% include 'base.html' %}
+<h1>welcome to Vagdevi Technologies</h1>
+<h2>hai siva good evening</h2>
+</body>
+</html>
+
+	base.html
+	---------
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="red">
+</body>
+</html>
+
+step6:
+----
+to configure the url patterns for our views in the urls.py file?
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app16.views import welcome
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wel/',welcome)
+]
+
+
+step7:
+----
+to apply the migrations
+
+	python manage.py migrate
+
+step8:
+-----
+to start the server
+
+	python manage.py runserver
+
+step9:
+----
+to send the request to the server
+
+	http://127.0.0.1:8000/wel
+
+structure:
+---------
+	proj16
+	   |--->app16
+	   |      |--->views.py
+	   |--->proj16
+	   |      |--->urls.py
+	   |      |--->settings.py
+	   |--->templates
+	   |      |--->welcome.html
+	   |      |--->base.html
+	   |--->manage.py
+
+MIME:
+-----
+MIME(Multipurpose Internent Mail Extension)
+
+Generally in client-server programming, the server is going to be sending the some information from server-side to browser side, at that time server is going to be sending the data based on the MIME type.
+
+MIME type is nothing but a representation of the data.
+
+Depends on MIME type, the data is displayed on the browser.
+
+In django framework we can specify the MIME type to the content_type header of http protocol at the time of creating HttpResponse class object.
+
+Syntax:
+	HttpResponse(data,content_type= "mimetype")
+
+The "content_type " response header is known as MIME type.
+
+Server sends MIME type to client to let them know the which kind of data its sending.
+
+The default MIME type of the content_type header of http protocol is text/html.
+
+
+	NAME			  MIME Type
+	-----------------------------------
+1.Adobe portable document format   1. Application/pdf
+2.Hyper text markup language	   2. Text/html
+3.Extensible markup language	   3.Application/xml
+4.Microsoft word		   4. Application/msword
+5.images		           5.images/jpg, images/png
+6.text				   6. text/plain
+
+
+ex:
+---
+step1:
+-----
+to create a project
+
+	django-admin startproject proj17
+
+step2:
+-----
+goto project location and to create an application in our project.
+
+	cd proj17
+
+	python manage.py startapp app17
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app17'
+]
+
+step4:
+------
+to create a views in the views.py file of the application
+
+	views.py
+	-------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+data="""<html><head><body><table>
+<tr><th>Eid</th><th>Ename</th><th>Sal</th></tr>
+<tr><td>101</td><td>Siva</td><td>2000</td></tr>
+<tr><td>102</td><td>Rama</td><td>3000</td></tr>
+<tr><td>103</td><td>Krishna</td><td>4000</td></tr>
+</table></body></head></html>"""
+
+def htmlview(request):
+    return HttpResponse(data,content_type="text/html")
+def xmlview(request):
+    return HttpResponse(data,content_type="application/xml")
+    
+step5:
+----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app17.views import htmlview,xmlview
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('html/',htmlview),
+    path('xml/',xmlview)
+]
+
+step6:
+-----
+to apply the migrations
+
+	python manage.py migrate
+
+step7:
+-----
+to start the server
+
+	python manage.py runserver
+
+step8:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/html
+	http://127.0.0.1:8000/xml
+
+structure:
+---------
+	proj17	
+	   |--->app17
+	   |      |--->views.py
+	   |--->proj17
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->manage.py
+
+
+
+
+
+
+
+
+
+
+
+
+
+

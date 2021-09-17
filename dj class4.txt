@@ -1,0 +1,130 @@
+ex22:
+----
+wap to create radio buttons?
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+Select your gender:
+<input type="radio" name="Mf" value="m">Male
+<input type="radio" name="Mf" value="f">Female
+</body>
+</html>
+
+ex23:
+---
+wap to create a check buttons?
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+Select your Courses:
+<input type="checkbox" value="p">Python
+<input type="checkbox" value="d">Django
+<input type="checkbox" value="j">Java
+<input type="checkbox" value="f">Flask
+</body>
+</html>
+
+ex24:
+---
+wap to create a dropdown list?
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+Select your Country:
+<select>
+   <option name='india' value='i'>India</option>
+   <option name='china' value='c'>China</option>
+   <option name='pakistan' value='p'>Pakistan</option>
+   <option name='srilanka' value='s'>Srilanka</option>
+   <option name='afganistan' value='a'>Afganistan</option>
+   <option name='kazikistan' value='k'>kazikistan</option>
+</select>
+</body>
+</html>
+
+ex25:
+---
+wap to create a textarea?
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+write your comments: <br>
+<textarea rows="5" cols="20">
+</textarea>
+</body>
+</html>
+
+ex26:
+----
+wap to create a student registration Form?
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<center>
+<h1>Student Registration Form</h1>
+<form action="success.html">
+Enter First Name:
+<input type="text" name="fn"><br><br>
+Enter Last Name:
+<input type="text" name="ln"><br><br>
+Enter Username:
+<input type="text" name="un"><br><br>
+Enter Password:
+<input type="password" name="pw"><br><br>
+Enter Email:
+<input type="email" name="em"><br><br>
+Contact:
+<select>
+<option>+91</option>
+<option>+92</option>
+<option>+93</option>
+</select>
+<input type="mobile" name="mb"><br><br>
+Select Your Gender:
+<input type="radio" name="mf" value="m">Male
+<input type="radio" name="mf" value="f">Female<br><br>
+<input type="checkbox">
+<a href="terms.html">Terms and Conditions</a> read the all terms and conditions<br><br>
+<input type="submit" name="SUBMIT">
+</form>
+</center>
+</body>
+</html>
+
+
+	success.html
+	------------
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Submitted successfully</h1>
+</body>
+</html>
+
+	terms.html
+	----------
+<!DOCTYPE html>
+<html>
+<body>
+hhhhhhhhhhhhhhhh uAFuagkHIOgs
+</body>
+</html>
+
+

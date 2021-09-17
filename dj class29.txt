@@ -1,0 +1,295 @@
+Django Forms:
+------------
+	previously we are implemented forms by using HTML,by using HTML we can implement the forms and validateing the forms more comlicated.
+
+	to overcome that problem django provides forms concept,in the django forms we can implement the forms HTML + Python code.
+
+	Django forms to implement the forms in pythonicway.
+
+Django forms can be categorized into two types,they are
+
+	1).Normal form
+
+	2).Model form
+
+form field types are similar to model field types.
+
+Normal form:
+-----------
+	form is a class,we can create our own form class that class is  extending by Form class of forms module.
+
+	we can create a forms in the forms.py file of the application.
+
+ex:
+---
+create a djnago project with django normal form?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj24
+
+step2:
+-----
+goto project location and to create an application in our project location.
+
+	cd proj24
+
+	python manage.py startapp app24
+
+step3:
+------
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app24'
+]
+
+step4:
+------
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+
+step5:
+-----
+to create a form in the forms.py file of the application.
+
+	forms.py
+	--------
+from django import forms
+
+class employe(forms.Form):
+    eid=forms.IntegerField(label="enter employeId:")
+    ename=forms.CharField(label="enter employe name:",
+                          max_length=20)
+    
+step6:
+-----
+to create a views in the views.py file of the application
+
+	views.py
+	--------
+from django.shortcuts import render
+from .forms import employe
+# Create your views here.
+def emp(request):
+    employe_obj=employe()
+    return render(request,'empform.html',{'e':employe_obj})
+
+	empform.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form>
+{{ e }}
+<input type="submit" value="insert">
+</form>
+</body>
+</html>
+
+step7:
+-----
+to create a url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from app24 import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('empobj/',views.emp)
+]
+
+step8:
+-----
+to apply the migrations
+
+	python maange.py migrate
+
+step9:
+----
+to start the server
+
+	python manage.py runserver
+
+step10:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/empobj
+
+structure:
+---------
+	proj24
+	   |--->app24
+	   |      |--->forms.py
+	   |      |--->views.py
+	   |--->proj24
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->empform.html
+	   |--->manage.py
+
+note:
+----
+in the above example form is ready but it is not more convinient/beautiful.
+
+if we want to display the form more convinient,django inbuilt provides some options,they are
+
+		as_p	--> paragraph
+		as_t	--> table
+		as_ul	--> list
+
+ex:
+---
+create django project with normal form?
+
+step1:
+----
+to create a project
+
+	django-admin startproject proj25
+
+step2:
+-----
+goto project location and to create an application in the project location.
+
+	cd proj25
+
+	python manage.py startapp app25
+
+step3:
+----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+
+INSTALLED_APPS = [
+    
+    'app25'
+]
+		
+step4:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+       
+        'DIRS': [BASE_DIR/'templates'],       
+    },
+]
+
+step5:
+-----
+to create a normal form in the forms.py file of the application
+
+	forms.py
+	--------
+from django import forms
+
+class student(forms.Form):
+    sid=forms.IntegerField(label="enter student id:",
+                help_text="studentId contains 3 digits")
+    sname=forms.CharField(label="Enter student name:",
+                          max_length=20)
+    pwd=forms.CharField(label="enter password:",
+                        widget=forms.PasswordInput())
+    
+step6:
+----
+to create a views in the views.py file of the application.
+
+	views.py
+	-------
+from django.shortcuts import render
+from .forms import student
+# Create your views here.
+def studentview(request):
+    student_obj=student()
+    return render(request,'stdform.html',{'s':student_obj})
+
+
+	stdform.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<form>
+{{s.as_p}}
+<input type="submit" value="insert">
+</form>
+</body>
+</html>
+
+step7:
+-----
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	--------
+from django.contrib import admin
+from django.urls import path
+from app25 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('stdobj/',views.studentview)
+]
+
+step8:
+------
+to apply the migrations
+
+	python manage.py migrate
+
+step9:
+-----
+to start the server
+
+	python manage.py runserver
+
+step10:
+------
+to send the request to the server
+
+	http://127.0.0.1:8000/stdobj
+
+structure:
+---------
+	proj25
+	   |--->app25
+	   |      |--->forms.py
+	   |      |--->views.py
+	   |--->proj5
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->stdform.html
+	   |--->manage.py
+
+
+
+

@@ -1,0 +1,169 @@
+ex1:
+----
+wap to check wheather given number positive or nrgative or zero?
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+   function pnz(){
+          number=parseInt(document.getElementById('num').value);
+	  if(number>0)
+            {
+	      document.write("Given number is Positive Integer");
+             }
+	  else if(number<0)
+	    {
+              document.write("Given number is Negative Integer");
+ 	     }
+	  else
+	     {
+	       document.write("Given number is Zero");
+	     }
+        }		
+	
+</script>
+</head>
+<body>
+Enter Your Number: 
+<input type="text" id='num'>
+<button onclick="pnz()">check</button>
+</body>
+</html>
+
+ex2:
+---
+wap to print 1-N natural numbers by using while loop?
+
+<!DOCTYPE html>
+<html>
+<head>  
+</head>
+<body>
+<script>
+    var i=1;
+    var num=10;
+    while(i<=num)
+      {
+        document.write(i,"<br>");
+        i++;
+       }
+</script>
+</body>
+</html>
+
+ex3:
+----
+wap to print 1-N natural numbers by using for loop?
+
+<!DOCTYPE html>
+<html>
+<head>  
+</head>
+<body bgcolor="red">
+<script>
+    var i=1
+    var num=10;
+    for(i;i<=num;i++)
+      {
+        document.write(i,"<br>");
+        
+       }
+</script>
+</body>
+</html>
+
+ex4:
+---
+<!DOCTYPE html>
+<html>
+<head>  
+<script>
+    function generate(){
+	var i=parseInt(document.getElementById('fn').value);
+	var num=parseInt(document.getElementById('en').value);
+	for(i;i<=num;i++)
+	  {
+	    document.write(i,"<br>");	   
+          }
+      }
+</script>
+</head>
+<body bgcolor="powderblue">
+Enter starting number:
+<input type="text" id='fn'><br><br>
+Enter Ending number:
+<input type="text" id='en'><br><br>
+<button onclick="generate()">Generat the numbers</button>
+</body>
+</html>
+
+
+ex5:
+----
+wap to check wheather given number is Armstrong number or not?
+
+<!DOCTYPE html>
+<html>
+<head>  
+<script>
+    function armstrong(){
+	var num=parseInt(document.getElementById('num').value);
+	var temp=num;s=0;
+        while(num>=1)
+	  {
+            dig=num%10;
+	    s=s+dig*dig*dig;
+	    num=parseInt(num/10);
+          }
+        if(temp==s)
+	  {
+	    alert("Given number is Armstrong number");
+	   }
+	else
+	  {
+	     alert("Given number is not a Armstrong number");
+	  }
+     }            
+        
+</script>
+</head>
+<body bgcolor="green">
+Enter Your number:
+<input type="text" id='num'><br><br>
+<button onclick="armstrong()">check</button>
+</body>
+</html>
+
+ex6:
+---
+wap to display current system date and time on the webpage?
+
+<!DOCTYPE html>
+<html>
+<head>  
+</head>
+<body>
+<script>
+    var d=new Date();
+    document.write(d,'<br>');
+    document.write(d.getDate());
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

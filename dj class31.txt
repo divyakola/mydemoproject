@@ -1,0 +1,204 @@
+ex:
+---
+create django project with model forms?
+
+step1:
+---
+to create a project
+
+	django-admin startproject proj27
+
+step2:
+----
+goto project location and to create an application in the project location.
+
+	cd proj27
+
+	python manage.py startapp app27
+
+step3:
+------
+to install our application in the settings.py file of the project.
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'app27'
+]
+
+step4:
+-----
+to configure the database settings in the settings.py file of the project.
+
+step5:
+-----
+to define a models in the models.py file of the application.
+	
+	models.py
+	---------
+from django.db import models
+
+# Create your models here.
+class Employe(models.Model):
+    eid=models.IntegerField(primary_key=True)
+    ename=models.CharField(max_length=20)
+    eadd=models.CharField(max_length=30)
+    sal=models.DecimalField(max_digits=6,decimal_places=2)
+    
+step6:
+-----
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+-----
+to create a model
+
+	python manage.py makemigrations
+
+step8:
+------
+to generate tables in the database
+
+	python manage.py migrate
+
+step9:
+-----
+to create modelforms in the forms.py file of the application.
+
+	forms.py
+	--------
+from django import forms
+from .models import Employe
+
+class EmployeForm(forms.ModelForm):
+    class Meta:
+        model=Employe
+        fields='__all__'
+
+step10:
+------
+to create a templates and to set the path for our templates in the settings.py file of the project.
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],        
+    },
+]
+	
+step11:
+-----
+to create a views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from .forms import EmployeForm
+from django.http import HttpResponse
+from .models import Employe
+# Create your views here.
+def input(request):
+    emp_form=EmployeForm()
+    return render(request,'input.html',{'e':emp_form})
+def insertion(request):
+    emp_form=EmployeForm(request.POST)
+    if emp_form.is_valid():
+        emp_form.save()
+        return HttpResponse("Inserted successfully")
+def display(request):
+    data=Employe.objects.all()
+    return render(request,'output.html',{'records':data})
+
+	input.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form action="insert" method="post">
+{% csrf_token %}
+{{ e.as_p }}
+<input type="submit" value="add">
+</form>
+</body>
+</html>
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="orange">
+<table border="5">
+<tr><th>Eid</th>
+    <th>Ename</th>
+    <th>Eadd</th>
+    <th>Salary</th>
+</tr>
+{% for rec in records %}
+  <tr><td>{{ rec.eid }}</td>
+      <td>{{ rec.ename }}</td>
+      <td>{{ rec.eadd }}</td>
+      <td>{{ rec.sal }}</td>
+   </tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+step12:
+------
+to configure the url patterns for our views in the urls.py file of the project.
+
+	urls.py
+	------
+from django.contrib import admin
+from django.urls import path
+from app27 import views
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('in/',views.input),
+    url('insert',views.insertion),
+    path('result/',views.display)
+]
+
+step13:
+-----
+to start the server
+
+	python manage.py runserver
+
+step14:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/in
+	http://127.0.0.1:8000/result
+
+structure:
+---------
+	proj27
+	   |--->app27
+	   |      |--->models.py
+	   |	  |--->forms.py
+	   |	  |--->views.py
+	   |--->proj27
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->input.html
+	   |      |--->output.html
+	   |--->manage.py
+
+
+
+

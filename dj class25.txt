@@ -1,0 +1,328 @@
+note:
+----
+we can perorm logical operations on models by using Q
+
+>>> from app18.models import Employee
+>>> from django.db.models import Q
+>>> records=Employee.objects.all()
+>>> for rec in records:
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> for rec in Employee.objects.all().filter(Q(dno=10) & Q(sal=4000)):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+
+>>> for rec in Employee.objects.all().filter(Q(dno=10) | Q(sal=4000)):
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+
+>>> for rec in Employee.objects.all().filter(~Q(dno=10)):
+          print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+102 rama 2000.00 20
+103 krishna 4000.00 30
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+how to update the objects/records?
+----------------------------------
+	we can update the objects/records by using update() of objects manager.
+
+	the update() to return the no.of objects are updated.
+
+>>> records=Employee.objects.all()
+>>> for rec in records:
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 4000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 3000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> Employee.objects.all().filter(dno=10).update(sal=5000)
+2
+
+>>> for rec in Employee.objects.all():
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 5000.00 10
+102 rama 2000.00 20
+103 krishna 4000.00 30
+104 sachin 5000.00 10
+105 dhoni 2500.00 20
+106 virat 3500.00 30
+
+>>> Employee.objects.all().update(sal=8000)
+6
+
+>>> for rec in Employee.objects.all():
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 8000.00 10
+102 rama 8000.00 20
+103 krishna 8000.00 30
+104 sachin 8000.00 10
+105 dhoni 8000.00 20
+106 virat 8000.00 30
+
+how to delete the objects/records?
+---------------------------------
+	we can delete the objects by using delete() of objects manager.
+
+	the delete() to return the no.of objects are deleted.
+
+>>> for rec in Employee.objects.all():
+       print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+101 siva 8000.00 10
+102 rama 8000.00 20
+103 krishna 8000.00 30
+104 sachin 8000.00 10
+105 dhoni 8000.00 20
+106 virat 8000.00 30
+
+>>> Employee.objects.all().filter(dno=10).delete()
+(2, {'app18.Employee': 2})
+
+>>> for rec in Employee.objects.all():
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+102 rama 8000.00 20
+103 krishna 8000.00 30
+105 dhoni 8000.00 20
+106 virat 8000.00 30
+
+>>> Employee.objects.all().delete()
+(4, {'app18.Employee': 4})
+
+>>> for rec in Employee.objects.all():
+        print(rec.eid,rec.ename,rec.sal,rec.dno)
+
+No-Records found
+
+>>> Employee.objects.all().count()
+0
+
+ex:
+---
+create a django project to store the data into the database and rereive the data and that data display on the Browser?
+
+step1:
+-----
+to create a project
+
+	django-admin startproject proj19
+
+step2:
+-----
+goto project location and to create an application in the project location.
+
+	cd proj19
+
+	python manage.py startapp app19
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+   
+    'app19'
+]
+
+step4:
+----
+to configure the database settings in the settings.py file of the project.
+
+	settings.py
+	----------
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+step5:
+----
+to create a models in the models.py file of the application.
+
+	models.py
+	---------
+from django.db import models
+
+# Create your models here.
+class Student(models.Model):
+    sid=models.IntegerField(primary_key=True)
+    sname=models.CharField(max_length=20)
+    fee=models.DecimalField(max_digits=6,decimal_places=2)
+    add=models.CharField(max_length=30)
+
+step6:
+------
+to check the errors in our model
+
+	python manage.py check
+
+step7:
+-----
+to create a model
+
+	python manage.py makemigrations
+
+step8:
+-----
+to create a table in the database
+
+	python manage.py migrate
+
+step9:
+-----
+to create a templates and to set the path for our templates in the settings.py file of the project
+
+	settings.py
+	-----------
+TEMPLATES = [
+    {
+        
+        'DIRS': [BASE_DIR/'templates'],   
+      },
+]
+
+
+step10:
+------
+to create a views in the views.py file of the application.
+
+	views.py
+	---------
+from django.shortcuts import render
+from .models import Student
+from django.http import HttpResponse
+# Create your views here.
+def input(request):
+    return render(request,'input.html')
+
+def insert(request):
+    sid1=int(request.GET['sid'])
+    sname1=request.GET['sn']
+    fee1=float(request.GET['fe'])
+    add1=request.GET['ad']
+    s=Student(sid=sid1,sname=sname1,fee=fee1,add=add1)
+    s.save()
+    return HttpResponse("Inserted successfully")
+
+def display(request):
+    data=Student.objects.all()
+    return render(request,'output.html',{'records':data})
+
+
+	input.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<form action="insert">
+Enter StudentId:
+<input type="text" name='sid'><br><br>
+Enter Student Name:
+<input type="text" name="sn"><br><br>
+Enter Student Fee:
+<input type="text" name="fe"><br><br>
+Enter Student Address:
+<input type="text" name="ad"><br><br>
+<input type="submit" value="insert">
+</form>
+</body>
+</html>
+
+	output.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="blue">
+<table border="5">
+<tr><th>Sid</th>
+    <th>Sname</th>
+    <th>Fee</th>
+    <th>Address</th>
+</tr>
+{% for rec in records %}
+     <tr><td>{{rec.sid}}</td>
+         <td>{{rec.sname}}</td>
+         <td>{{rec.fee}}</td>
+         <td>{{rec.add}}</td>
+     </tr>
+{% endfor %}
+</table>
+</body>
+</html>
+
+step11:
+-------
+to configure the url patterns for our views in urls.py file of the project.
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app19.views import input,insert,display
+from django.conf.urls import url
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('in/',input),
+    url('insert',insert),
+    path('res/',display)
+]
+
+step12:
+------
+to start the server
+
+	python manage.py runserver
+
+step13:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/in
+	http://127.0.0.1:8000/res
+
+structure:
+--------
+	proj19
+	   |--->app19
+	   |      |--->models.py
+	   |      |--->views.py
+	   |--->proj19
+	   |      |--->settings.py
+	   |      |--->urls.py
+	   |--->templates
+	   |      |--->input.html
+	   |      |--->output.html
+           |--->manage.py
+
+assignment-1:
+-------------
+create a Registration Form and to store the data into the database and to display the data on the webbrowser?
+

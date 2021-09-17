@@ -1,0 +1,218 @@
+ex11:
+----
+wap to display the images on the webpage?
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<img src="C:\Users\DELL\Desktop\guido.jfif">
+</body>
+</html>
+
+ex12:
+----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<img src="C:\Users\DELL\Desktop\guido.jfif" align="right" height=100 width=200 alt="guido">
+</body>
+</html>
+
+ex13: wap to create a hyper links
+----
+
+	sample.html
+	------------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<a href="https://www.python.org/">Python</a><br>
+<a href="https://sivapython.blogspot.com/">Siva Python</a><br>
+<a href="welcome.html">Welcome</a>
+</body>
+</html>
+
+	welcome.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+ex14: wap to create hyperlinks with images
+----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<a href="https://www.python.org/">
+<img src="C:\Users\DELL\Desktop\guido.jfif"></a><br>
+</body>
+</html>
+
+ex15: wap to dispaly the data onthe webpage in tablular format?
+-----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<table border="5" >
+<tr>
+   <th>Eid</th>
+   <th>Ename</th>
+   <th>Sal</th>
+</tr>
+<tr>
+   <td>101</td>
+   <td>siva</td>
+   <td>3000</td>
+</tr>
+<tr>
+   <td>102</td>
+   <td>rama</td>
+   <td>4000</td>
+</tr>
+<tr>
+   <td>103</td>
+   <td>krishna</td>
+   <td>2000</td>
+</tr>
+</table>
+</body>
+</html>
+
+ex16:
+-----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body bgcolor="powderblue">
+<table border="5" width="50%">
+<tr>
+   <th>Eid</th>
+   <th>Ename</th>
+   <th>Sal</th>
+</tr>
+<tr>
+   <td>101</td>
+   <td>siva</td>
+   <td>3000</td>
+</tr>
+<tr>
+   <td>102</td>
+   <td>rama</td>
+   <td>4000</td>
+</tr>
+<tr>
+   <td>103</td>
+   <td>krishna</td>
+   <td>2000</td>
+</tr>
+</table>
+</body>
+</html>
+
+ex17: wap to create a button?
+---
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<button>ClickMe</button>
+</body>
+</html>
+
+ex18: wap to create a button with action?
+----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<button onclick="alert('hello siva good afternoon')">
+ClickMe</button>
+</body>
+</html>
+
+ex19:wap to read the data from the user input?
+----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<label>Enter First Name:</label>
+<input type="text">
+<br><br>
+<label>Enter Last Name:</label>
+<input type="text">
+<br>
+</body>
+</html>
+
+ex20:wap to read the data from the user input without label?
+----
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+Enter First Name:
+<input type="text">
+<br><br>
+Enter Last Name:
+<input type="text">
+<br>
+</body>
+</html>
+
+ex21:wap to read the data from the user input with placeholder?
+---- 
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<input type="text" placeholder="Enter First Name">
+<br><br>
+<input type="text" placeholder="Enter Last Name">
+<br>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

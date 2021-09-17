@@ -1,0 +1,248 @@
+ex: group selector
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='base.css'>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>Python is a High-level,General purpose,interpreted,interactive,modular,dynamictyped,procedure,object oriented and scripting programming langauge.</p>
+<h2>hello siva good evening</h2>
+</body>
+</html>
+
+	base.css
+	--------
+h1,p,h2{
+    color:red;
+    font-size:20px;
+    font-style:italic;
+    font-family:elephant;
+  }
+
+
+ex: universal selector
+---
+
+	sample.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='base.css'>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+<p>Python is a High-level,General purpose,interpreted,interactive,modular,dynamictyped,procedure,object oriented and scripting programming langauge.</p>
+<h2>hello siva good evening</h2>
+</body>
+</html>
+
+	base.css
+	---------
+*{
+    color:blue;
+    font-size:20px;
+    font-style:italic;
+    font-family:elephant;
+  }
+
+ex:
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='base.css'>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+	base.css
+	--------
+h1{
+    
+    text-align:center;
+    background-color:blue;
+    color:red;
+    font-size:50px;
+    font-style:italic;
+    font-family:elephant;
+    border:2px solid;
+    padding:20px;
+    margin:100px
+  }
+
+ex: adding the background images
+---
+
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='base.css'>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+	base.css
+	--------
+body{
+     background-image:url("guido.jfif");
+     background-repeat:no-repeat;
+     background-size:500px;
+   }
+
+
+h1{
+    
+    text-align:center;
+    background-color:blue;
+    color:red;
+    font-size:50px;
+    font-style:italic;
+    font-family:elephant;
+    border:2px solid;
+    padding:20px;
+    margin:100px
+  }
+       
+
+ex:
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href='base.css'>
+</head>
+<body>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+
+
+
+	base.css
+	--------
+body{
+     background-image:url("https://images.unsplash.com/photo-1627680313635-d1799acd5899?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDN8NnNNVmpUTFNrZVF8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60");
+     background-repeat:no-repeat;
+     background-size:1200px 900px;
+   }
+
+
+h1{
+    
+    text-align:center;
+    background-color:blue;
+    color:red;
+    font-size:50px;
+    font-style:italic;
+    font-family:elephant;
+    border:2px solid;
+    padding:20px;
+    margin:100px
+  }
+      
+
+
+		JavaScript
+		----------
+	JavaScript is a object-based scripting programming language.
+
+	it is a interpreted language
+
+	it is used to create interactive websites.
+
+applications of javascript:
+--------------------------
+	client-side validations
+	display the date and time
+	pop-up,alert messages
+	...
+	...
+
+we can implement the javascript code in 3-ways,they are
+
+	1).script tag in our html tag of body of the webpage
+		(inline javascript)/between the body tag
+                              
+
+	2).script tag in our head of the webpage
+		(internal javascript)/between the headtag
+
+	3).to create seperate javascript file
+			(external javascript)
+
+
+ex: inline javascript
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script>
+  alert('hello siva')
+</script>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+ex: internal javascript
+---
+	sample.html
+	-----------
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+    function msg(){
+	alert("hello world");
+       }
+</script>
+</head>
+<body>
+<button onclick=msg()>ClickMe</button>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+ex: external javascript
+---
+	sample.html
+	----------
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="demo.js">    
+</script>
+</head>
+<body bgcolor="powderblue">
+<button onclick=msg()>ClickMe</button>
+<h1>welcome to Vagdevi Technologies</h1>
+</body>
+</html>
+
+	demo.js
+	--------
+function msg(){
+	alert("hello world");
+       }
+
+
+ 

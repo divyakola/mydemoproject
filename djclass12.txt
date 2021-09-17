@@ -1,0 +1,191 @@
+what is View?
+-------------
+	a view is a python function or class,which is used to represent the business logics.
+
+	a view takes the request from the enduser/client,process that request and give back the response to the enduser/client.
+
+	we can implement the views in two way's,they are
+
+	1).Function Based views
+
+	2).Class Based views
+
+Function Based views:
+---------------------
+	we can implement the views by using functions,that type of views are called Function based views.
+
+	whenever we are sending the request internally our django takes that request,that request is passing to url-dispatcher.
+
+	we can verify that url request is valid or not,wheather it is valid to create request object,that request object is passing to view function and that view function is executed otherwise to raise 404 webpage is not available message on the web browser.
+
+	in function based views we can implement the different http methods like get(),post(),put(),delete(),trace(),move(),...by using conditional statements.
+
+ex:
+---
+create a django project by using pycharm IDE to print hello world on the webpage?
+
+	double click on pycharmIDE application
+		|
+	goto file menu
+		|
+	select new project
+		|
+	select Django --> set the project name --> select environment or interpreter --> goto more settings --> set the application name --> click on create.
+
+
+how to start the server in pycharmIDE?
+---------------------------------------
+	goto tools menu
+		|
+	select run manage.py taskbar
+		|
+	  runserver
+
+ex:
+---
+create a django project with single app and multiple views?
+
+step1:
+-----
+to create project
+
+	django-admin startproject proj3
+
+step2:
+-----
+goto project location and to create an application in our project clocation.
+
+	cd proj3
+
+	python manage.py startapp app3
+
+step3:
+-----
+to install our application in the settings.py file of the project.
+
+	settings.py
+	-----------
+INSTALLED_APPS = [
+    
+    'app3'
+]
+
+step4:
+----
+to create function based-views in the views.py file of the application.
+
+	views.py
+	--------
+from django.shortcuts import render
+from django.http import HttpResponse
+from datetime import datetime
+from calendar import *
+# Create your views here.
+def wishes(request):
+    return HttpResponse("hai siva good evening")
+
+def dateandtime(request):
+    now=datetime.now()
+    return HttpResponse(now)
+
+def monthofcal(request):    
+    c=HTMLCalendar()
+    res=c.formatmonth(2021,8)
+    return HttpResponse(res)
+
+step5:
+----
+to configure the url patterns for our views in the urls.py file
+
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from app3 import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wis/',views.wishes),
+    path('cdt/',views.dateandtime),
+    path('cal/',views.monthofcal)
+]
+
+step6:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+step7:
+-----
+to start the server
+
+	python manage.py runserver
+
+step8:
+-----
+to send the request to the server
+
+	http://127.0.0.1:8000/wis
+	http://127.0.0.1:8000/cdt
+	http://localhost:8000/cal
+
+structure:
+---------
+	proj3
+	   |---> app3
+	   |      |---> views.py
+	   |---> proj3
+	   |      |---> settings.py
+	   |      |---> urls.py
+	   |---> manage.py
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

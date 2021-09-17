@@ -1,0 +1,90 @@
+Django Environment SetUp:
+-------------------------
+1).python
+2).IDE's
+3).virtual environment
+4).Django
+
+what is pip?
+-----------
+pip(python installation package) is a python package manager to install or uninstall 3rd party packages in python.
+
+	pip install packagename
+
+
+	pip uninstall packagename
+
+we can access the pip on any location of our computer first we need to set that path for scripts.
+(by default pip is available in the scripts folder)
+
+virtual environment:
+--------------------
+	virtual environment is a isolated python environment.
+
+	we can create a virtual environments by using "virtualenv"
+
+what is virtualenv?
+-------------------
+	virtualenv is a tool to create virtual environments.
+
+how to install virtualenv?
+--------------------------
+	pip install virtualenv
+
+how to create our own virtual environments?
+-------------------------------------------
+	virtaulenv ourvirtualenvironmentname
+
+ex:
+---
+	virtualenv myvenv
+
+how to activate the our own virtual environment?
+------------------------------------------------
+	ourvirtualenvironmentname\scripts\activate
+
+ex:
+---
+	myvenv\scripts\activate
+
+how to deactivate the our own virtual environment?
+--------------------------------------------------
+	ourvirtualenvironmentname\scripts\deactivate
+
+ex:
+---
+	myvenv\scripts\deactivate
+
+how to install django?
+----------------------
+	pip install django==versionnumber
+
+		(or)
+
+	pip install django
+
+how to check django successfully installed or not?
+--------------------------------------------------
+	django-admin
+
+how to get the django version?
+------------------------------
+	django-admin --version
+
+(myvenv) F:\vagdevi6pmdjango>django-admin --version
+3.2.6
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+

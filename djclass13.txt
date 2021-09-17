@@ -1,0 +1,201 @@
+example:
+-------
+create a django project with multiple applications?
+
+step1:
+------
+to create a project
+	django-admin startproject projectname
+ex:
+----
+django-admin startproject proj4
+
+step2:
+-----
+goto project location,to create a application in that project.
+
+	cd projectname
+
+	python manage.py startapp applicationname
+
+ex:
+----
+(myvenv) F:\django4pm>cd proj4
+
+python manage.py startapp wishesapp
+
+python manage.py startapp timeapp
+
+step3:
+------
+to install our applications into settings.py file of the project
+
+	settings.py
+	----------
+INSTALLED_APPS = [
+    
+    'wishesapp',
+    'timeapp'
+]
+
+step4:
+------
+to create a views in views.py file of the application
+
+	wishesapp/views.py
+	------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+# Create your views here.
+def morning(request):
+    return HttpResponse("<h1>Good morning</h1>")
+def afternoon(request):
+    return HttpResponse("<h1>Good afternoon</h1>")
+def evening(request):
+    return HttpResponse("<h1>Good Evening</h1>")
+def night(request):
+    return HttpResponse("<h1>Good night </h1>")
+
+	timeapp/views.py
+	----------------
+from django.shortcuts import render
+from datetime import datetime
+from django.http import HttpResponse
+# Create your views here.
+def dateandtime(request):
+    now=datetime.now()
+    return HttpResponse("<h1>the current system date and time is: "\+str(now)+"</h1>")
+
+step5:
+------
+to configure url patterns for our views in urls.py
+
+	urls.py
+	-----
+from django.contrib import admin
+from django.urls import path
+from wishesapp import views
+from timeapp import views
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('mor/',views.morning),
+    path('after/',views.afternoon),
+    path('evg/',views.evening),
+    path('nt/',views.night),
+    path('dt/',views.dateandtime)
+]
+
+step6:
+-----
+to apply the migrate
+
+	python manage.py migrate
+
+AttributeError: module 'timeapp.views' has no attribute 'morning'
+
+note:
+----
+python don't supporting module overloading,in that case django to recognize recent/last imported module only.
+
+we can solve that problem in the following ways
+
+scenario1:
+---------
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+import wishesapp.views as v1 
+import timeapp.views as v2 
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('mor/',v1.morning),
+    path('after/',v1.afternoon),
+    path('evg/',v1.evening),
+    path('nt/',v1.night),
+    path('dt/',v2.dateandtime)
+]
+
+scenario2:
+----------
+	urls.py
+	-------
+from django.contrib import admin
+from django.urls import path
+from wishesapp.views import morning,afternoon,evening,night
+from timeapp.views import dateandtime
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('mor/',morning),
+    path('after/',afternoon),
+    path('evg/',evening),
+    path('nt/',night),
+    path('dt/',dateandtime)
+]
+
+scenario3:
+---------
+including another urlconfiguration(to crate a seperate urls.py files in our appliocation after that application urls.py file including into project urls.py file)
+
+	wishesapp/urls.py
+	-----------------
+from . import views
+from django.urls import path
+
+urlpatterns=[
+    path('mor/',views.morning),
+    path('after/',views.afternoon),
+    path('evg/',views.evening),
+    path('nt/',views.night)
+    ]
+
+	timeapp/urls.py
+	---------------
+
+from . import views
+from django.urls import path
+
+urlpatterns=[
+    path('dt/',views.dateandtime)
+
+	proj4/urls.py
+	-------------
+from django.contrib import admin
+from django.urls import path
+from django.conf.urls import include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('wishes/',include('wishesapp.urls')),
+    path('time/',include('timeapp.urls'))
+    
+]
+
+
+how to start the server?
+------------------------
+	python manage.py runserver
+
+how to send the request?
+-----------------------
+	http://127.0.0.1:8000/projecturl/appurl
+
+	http://127.0.0.1:8000/wishes/mor
+
+	http://127.0.0.1:8000/time/dt
+
+
+structure
+--------
+	proj4
+	   |--->timeapp
+	   |      |--->views.py
+	   |      |--->urls.py
+	   |--->wishesapp
+	   |      |--->views.py
+	   |      |--->urls.py
+	   |--->proj4
+           |      |--->settings.py
+           |      |--->urls.py
+	   |--->manage.py
+
+
